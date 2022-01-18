@@ -1,0 +1,29 @@
+﻿@model projekat2.Models.Product
+
+<div>
+    <span class="d-inline-block"><b>Product name: </b></span><span class="mx-2">@Model.ProductName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Category: </b></span><span class="mx-2">@Model.Category.CategoryName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Supplier: </b></span><span class="mx-2">@Model.Supplier.CompanyName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Quantity per unit: </b></span><span class="mx-2">@Model.QuantityPerUnit</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Unit price: </b></span><span class="mx-2"> @Model.UnitPrice</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Units in stock: </b></span><span class="mx-2">@Model.UnitsInStock</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Total price: </b></span><span class="mx-2">@Model.TotalPrice</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Units on order: </b></span><span class="mx-2">@Model.UnitsOnOrder</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Discontinued: </b></span><span class="mx-2">@Html.DisplayFor(model => model.Discontinued)</span>
+</div>

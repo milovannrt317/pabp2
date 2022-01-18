@@ -1,0 +1,11 @@
+﻿@model projekat2.Models.Product
+
+<div>
+    <h4>Are you sure you want to delete this?</h4>
+    <hr />
+    <partial name="Details" model="@Model" />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="submit" value="Delete" class="btn btn-danger m-2 btn-lg" />
+    </form>
+</div>

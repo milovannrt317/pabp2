@@ -1,0 +1,41 @@
+﻿@model projekat2.Models.Order
+
+<div>
+    <span class="d-inline-block"><b>Order date: </b></span><span class="mx-2">@Model.OrderDate?.ToShortDateString()</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Required date: </b></span><span class="mx-2">@Model.RequiredDate?.ToShortDateString()</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Shipped date: </b></span><span class="mx-2">@Model.ShippedDate?.ToShortDateString()</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Freight: </b></span><span class="mx-2">@Model.Freight</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Ship name: </b></span><span class="mx-2"> @Model.ShipName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Ship address: </b></span><span class="mx-2">@Model.ShipAddress</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Ship city: </b></span><span class="mx-2">@Model.ShipCity</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Ship region: </b></span><span class="mx-2">@Model.ShipRegion</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Ship postal code: </b></span><span class="mx-2">@Model.ShipPostalCode</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Ship country: </b></span><span class="mx-2">@Model.ShipCountry</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Customer: </b></span><span class="mx-2">@Model.Customer.CompanyName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Employee: </b></span><span class="mx-2">@Model.Employee.FirstLastName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Ship via : </b></span><span class="mx-2">@Model.ShipViaNavigation.CompanyName</span>
+</div>

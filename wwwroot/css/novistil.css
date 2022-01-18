@@ -1,0 +1,85 @@
+﻿html {
+    scroll-behavior: smooth !important;
+}
+
+body {
+    background: #141313 url("/img/bckg.png") !important;
+    background-attachment: fixed !important;
+    color: white;
+}
+
+
+nav.navbar-transparent-black, .dropdown-menu {
+    background-color: rgba(0,0,0,0.5) !important;
+    color: white !important;
+}
+
+footer {
+    background: #2234ae;
+    background: linear-gradient(top, #2234ae 0%, #191714 74%);
+    background: -moz-linear-gradient(top, #2234ae 0%, #191714 74%);
+    background: -webkit-linear-gradient(top, #2234ae 0%, #191714 74%);
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form, .navbar-default {
+    border: none;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-toggle:focus,
+.dropdown-menu > li > a:hover, .dropdown-menu > .active > a,
+.navbar-default .navbar-nav > li > a:focus, .dropdown-menu > li > a:hover, .navbar-default .navbar-toggle:hover {
+    background: rgb(255,255,255, 0.1) !important;
+    color: rgb(255,255,255, 1) !important;
+}
+
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > .active > a {
+    color: rgb(255,255,255, 0.5);
+}
+
+navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover,
+.dropdown-menu > li > a:hover {
+    color: #fff;
+}
+
+a.navbar-brand {
+    color: inherit;
+}
+
+.navbar {
+    padding: 0 !important;
+}
+.nav-link {
+    padding: 0.9rem 1rem !important;
+}
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #04619f;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 21px;
+    opacity: 0.3;
+}
+
+#myBtn:hover {
+    opacity: 1;
+}
+
+table {
+    background-color: white !important;
+    color: black !important;
+}
+
+.modal-content {
+    color: black !important;
+}

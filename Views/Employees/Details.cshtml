@@ -1,0 +1,50 @@
+﻿@model projekat2.Models.Employee
+
+<div>
+    <span class="d-inline-block"><b>First name: </b></span><span class="mx-2">@Model.FirstName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Last name: </b></span><span class="mx-2">@Model.LastName</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Title: </b></span><span class="mx-2">@Model.Title</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Title of courtesy: </b></span><span class="mx-2">@Model.TitleOfCourtesy</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Birth date: </b></span><span class="mx-2"> @Model.BirthDate?.ToShortDateString()</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Hire date: </b></span><span class="mx-2">@Model.HireDate?.ToShortDateString()</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Address: </b></span><span class="mx-2">@Model.Address</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>City: </b></span><span class="mx-2">@Model.City</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Region: </b></span><span class="mx-2">@Model.Region</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Postal code: </b></span><span class="mx-2">@Model.PostalCode</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Country: </b></span><span class="mx-2">@Model.Country</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Home phone: </b></span><span class="mx-2">@Model.HomePhone</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Extension: </b></span><span class="mx-2">@Model.Extension</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Notes: </b></span><span class="mx-2">@Model.Notes</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Photo path: </b></span><span class="mx-2">@Model.PhotoPath</span>
+</div>
+<div>
+    <span class="d-inline-block"><b>Reports to: </b></span><span class="mx-2">@Model.ReportsToNavigation?.FirstLastName</span>
+</div>

@@ -1,0 +1,208 @@
+﻿@model PaginatedList<projekat2.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Products</h1>
+<hr />
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="details-modal">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable  modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+
+@if ((string)(ViewData["alert-show"] ?? "") == "true")
+{
+    <div class="alert alert-@ViewData["alert-class"] alert-dismissible fade show" role="alert">
+        @ViewData["alert-message"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <h4 class="text-center">Create new products for choosen supplier</h4>
+        <hr />
+        <form asp-action="Create" method="get">
+            <div class="form-group">
+                <label for="SupplierId" class="control-label">Supplier</label>
+                <select name="SupplierId" id="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create new" class="btn btn-primary btn-lg" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <h4 class="text-center">Filter products by customer and/or order</h4>
+        <hr />
+        <form asp-action="Filter" method="get">
+            <div class="form-group">
+                <label for="CustomerId" class="control-label">Customer</label>
+                <select name="CustomerId" id="CustomerId" class="form-control" asp-items="ViewBag.Customers"></select>
+            </div>
+            <div class="form-group">
+                <label for="OrderId" class="control-label">Order</label>
+                <select name="OrderId" id="OrderId" class="form-control" asp-items="ViewBag.Orders"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Filter" class="btn btn-primary btn-lg" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="d-flex flex-row justify-content-end">
+    <h6>Total results: @ViewData["total-results"]</h6>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Product name
+                </th>
+                <th>
+                    Quantity per unit
+                </th>
+                <th>
+                    Unit price
+                </th>
+                <th>
+                    Units in stock
+                </th>
+                <th>
+                    Total price
+                </th>
+                <th>
+                    Units on order
+                </th>
+                <th>
+                    Reorder level
+                </th>
+                <th>
+                    Discontinued
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Supplier
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsInStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReorderLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discontinued)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row flex-md-nowrap align-items-center">
+                            <button class="btn btn-warning edit mx-2" title="Edit" data-id="@item.ProductId"><i class="fas fa-pencil-alt"></i></button> |
+                            <button class="btn btn-info details mx-2" title="Details" data-id="@item.ProductId"><i class="fas fa-info-circle"></i></button> |
+                            <button class="btn btn-danger delete mx-2" title="Delete" data-id="@item.ProductId"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   class="page-link previous">
+                    Previous
+                </a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   class="page-link next">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="d-flex flex-row justify-content-center">
+        <h5>@Model.PageIndex of @Model.TotalPages</h5>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $('button.details').on('click', function () {
+                $('.modal-title').text("Products Details");
+                $('.modal-body').load(`Products/Details/${$(this).data('id')}`);
+                $('#details-modal').modal('show');
+                $('.alert').alert('close')
+            });
+        });
+        $(function () {
+            $('button.edit').on('click', function () {
+                $('.modal-title').text("Products Edit");
+                $('.modal-body').load(`Products/Edit/${$(this).data('id')}`);
+                $('#details-modal').modal('show');
+                $('.alert').alert('close')
+            });
+        });
+        $(function () {
+            $('button.delete').on('click', function () {
+                $('.modal-title').text("Products Delete");
+                $('.modal-body').load(`Products/Delete/${$(this).data('id')}`);
+                $('#details-modal').modal('show');
+                $('.alert').alert('close')
+            });
+        });
+    </script>
+}

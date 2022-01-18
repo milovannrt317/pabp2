@@ -1,0 +1,179 @@
+﻿@model PaginatedList<projekat2.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Employees</h1>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="details-modal">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable  modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+
+@if ((string)(ViewData["alert-show"]??"")=="true")
+{
+    <div class="alert alert-@ViewData["alert-class"] alert-dismissible fade show" role="alert">
+        @ViewData["alert-message"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<p>
+    <button class="btn btn-lg btn-primary create" title="Create new">Create new</button>
+</p>
+<div class="d-flex flex-row justify-content-end">
+    <h6>Total results: @ViewData["total-results"]</h6>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Title Of Courtesy
+                </th>
+                <th>
+                    Hire Date
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    Reports To
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="pagination-body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TitleOfCourtesy)
+                    </td>
+                    <td>
+                        @item.HireDate?.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReportsToNavigation.FirstLastName)
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row flex-md-nowrap align-items-center">
+                            <button class="btn btn-warning edit mx-2" title="Edit" data-id="@item.EmployeeId"><i class="fas fa-pencil-alt"></i></button> |
+                            <button class="btn btn-info details mx-2" title="Details" data-id="@item.EmployeeId"><i class="fas fa-info-circle"></i></button> |
+                            <button class="btn btn-danger delete mx-2" title="Delete" data-id="@item.EmployeeId"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   class="page-link previous" >
+                    Previous
+                </a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   class="page-link next">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="d-flex flex-row justify-content-center">
+        <h5>@Model.PageIndex of @Model.TotalPages</h5>
+    </div>
+</div>
+@section scripts{
+    <script>
+        //$(function () {
+        //    $('a.previous').on('click', function () {
+        //        $('.pagination-body').removeData();
+        //        $('.pagination-body').load(`Employees/Previous/`);
+        //    });
+        //});
+        //$(function () {
+        //    $('a.next').on('click', function () {
+        //        $('.pagination-body').removeData();
+        //        $('.pagination-body').load(`Employees/Next/`);
+        //    });
+        //});
+        $(function () {
+            $('button.create').on('click', function () {
+                $('.modal-title').text("Employees Create new");
+                $('.modal-body').load(`Employees/Create/`);
+                $('#details-modal').modal('show');
+                $('.alert').alert('close')
+            });
+        });
+        $(function () {
+            $('button.details').on('click', function () {
+                $('.modal-title').text("Employees Details");
+                $('.modal-body').load(`Employees/Details/${$(this).data('id')}`);
+                $('#details-modal').modal('show');
+                $('.alert').alert('close')
+            });
+        });
+        $(function () {
+            $('button.edit').on('click', function () {
+                $('.modal-title').text("Employees Edit");
+                $('.modal-body').load(`Employees/Edit/${$(this).data('id')}`);
+                $('#details-modal').modal('show');
+                $('.alert').alert('close')
+            });
+        });
+        $(function () {
+            $('button.delete').on('click', function () {
+                $('.modal-title').text("Employees Delete");
+                $('.modal-body').load(`Employees/Delete/${$(this).data('id')}`);
+                $('#details-modal').modal('show');
+                $('.alert').alert('close')
+            });
+        });
+    </script>
+}
