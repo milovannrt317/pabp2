@@ -34,7 +34,7 @@ namespace II_PROJEKAT
             });
             services.AddControllersWithViews();
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
@@ -58,7 +58,7 @@ namespace II_PROJEKAT
 
             app.UseAuthorization();
 
-            app.UseCookiePolicy();//
+            //app.UseCookiePolicy();//
 
             app.UseCors("CorsPolicy");
 
